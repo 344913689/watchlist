@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="zh-CNM">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ name }} - watchlist</title>
-    <link rel="icon" href="{{url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href=" {{ url_for('static', filename='style.css') }}" type="text/css" >
-</head>
-<body>
-    <h2>
-        <img class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}"/>
-        {{ name }}:watchlist
-    </h2>
-    <p>{{ movies|length }} Titles</p>
-    <ul class="movie-list">
-        {% for movie in movies %}
-        <li>{{ movie.title }} —— {{ movie.year }}</li>
-        {% endfor %}
-    </ul>
-    <img src="{{ url_for('static', filename='images/totoro.gif') }}"/>
-    <footer>
-        <small>&copy;2020 <a href="#">hello Flask</a></small>
-    </footer>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<p>{{ movies|length }} Titles</p>
+<ul class="movie-list">
+    {% for movie in movies %}
+    <li>
+        {{ movie.title }} —— {{ movie.year }}
+        <span class="float-right">
+            <a class="imdb" href="https://movie.douban.com/subject_search?search_text={{ movie.title }}" title="Find this movie on DOUBAN">豆瓣</a>
+        </span>
+    </li>
+    {% endfor %}
+</ul>
+<img src="{{ url_for('static', filename='images/totoro.gif') }}" title="totoro"/>
+{% endblock content %}

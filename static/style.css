@@ -8,6 +8,11 @@ body {
     font-family: '微软雅黑';
 }
 
+/* 公用 */
+.float-right {
+    float: right;
+}
+
 /* 页脚 */
 footer{
     color: #888;
@@ -19,6 +24,31 @@ footer{
 /* 头像 */
 .avatar{
     width: 40px;
+}
+
+/* 导航 */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #666;
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #111;
 }
 
 /* 列表 */

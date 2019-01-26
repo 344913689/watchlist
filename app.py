@@ -57,8 +57,17 @@ def forge():
     db.session.commit()
     click.echo('Done.')
 
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user = user.name)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @app.route('/')
 def index():
-    return render_template('index.html', name = name, movies = movies)
+    movies = Movie.query.all()
+    return render_template('index.html', movies = movies)
 
