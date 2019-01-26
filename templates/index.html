@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ name }} - watchlist</title>
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='style.css') }}" type="text/css" >
 </head>
 <body>
-    <h2>{{ name }}:watchlist</h2>
+    <h2>
+        <img class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}"/>
+        {{ name }}:watchlist
+    </h2>
     <p>{{ movies|length }} Titles</p>
-    <ul>
+    <ul class="movie-list">
         {% for movie in movies %}
         <li>{{ movie.title }} - {{ movie.year }}</li>
         {% endfor %}
     </ul>
+    <img src="{{ url_for('static', filename='images/totoro.gif') }}"/>
     <footer>
         <small>&copy;2020 <a href="#">hello Flask</a></small>
     </footer>
