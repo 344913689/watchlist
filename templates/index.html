@@ -16,7 +16,7 @@
     <p>{{ movies|length }} Titles</p>
     <ul class="movie-list">
         {% for movie in movies %}
-        <li>{{ movie.title }} - {{ movie.year }}</li>
+        <li>{{ movie.title }} —— {{ movie.year }}</li>
         {% endfor %}
     </ul>
     <img src="{{ url_for('static', filename='images/totoro.gif') }}"/>
