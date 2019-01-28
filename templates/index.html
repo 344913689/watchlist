@@ -13,7 +13,8 @@
         {{ movie.title }} —— {{ movie.year }}
         <span class="float-right">
             <a class="imdb" href="https://movie.douban.com/subject_search?search_text={{ movie.title }}" title="Find this movie on DOUBAN">豆瓣</a>
-        </span>        
+        </span>
+        {% if current_user.is_authenticated %}      
         <span class="float-right">
             <form method='POST' action="{{ url_for('delete', movie_id=movie.id) }}" class="inline-form">
             <input type="submit" name="submit" value="删除" class="btn" onclick="return confirm('确认删除？')">
@@ -22,6 +23,7 @@
         <span class="float-right">
             <a class="btn" href="{{ url_for('edit', movie_id = movie.id) }}">编辑</a>
         </span>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
