@@ -1,0 +1,9 @@
+1. 环境不在其中。
+2. 环境及依赖如下：
+    virtualenv
+    flask
+    flask-sqlalchemy
+    flask-migrate
+    pymysql
+    flask-dotenv
+    

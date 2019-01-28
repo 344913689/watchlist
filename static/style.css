@@ -79,3 +79,57 @@ nav li a:hover {
     margin: 0 auto;
     height: 100px;
 }
+
+/*覆盖浏览器对input元素自定义*/
+input[type=submit] {
+    font-family: inherit;
+}
+
+input[type=text] {
+    border:　1px solid #ddd;
+}
+
+input[name=year] {
+    width: 50px;
+}
+
+.btn {
+    font-size: 12px;
+    padding: 3px 5px;
+    margin:0 5px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: 1xp solid black;
+
+}
+
+.imdb {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    background: #f5c518;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.alert {
+    position: relative;
+    padding: 7px;
+    margin: 7px 0;
+    border: 1px solid transparent;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 5px;
+}

@@ -1,6 +1,6 @@
 #coding:utf-8
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, redirect, flash, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 import sys
@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:3306/watch'
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'dev'
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,14 +62,49 @@ def forge():
 @app.context_processor
 def inject_user():
     user = User.query.first()
-    return dict(user = user.name)
+    return dict(user = user)
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        year = request.form.get('year')
+        # 验证数据
+        if not title or not year or len(year) > 4 or len(title) > 60:
+            flash('输入错误，请重新输入！')
+            return redirect(url_for('index'))
+        movies = Movie(title=title, year=year)
+        db.session.add(movies)
+        db.session.commit()
+        flash('添加成功！')
+        return redirect(url_for('index'))
+
     movies = Movie.query.all()
     return render_template('index.html', movies = movies)
 
+
+@app.route('/movie/edit/<int:movie_id>', methods=['GET', 'POST'])
+def edit(movie_id):
+    movie = Movie.query.get_or_404(movie_id)
+
+    if request.method == 'POST':
+        title = request.form['title']
+        year = request.form['year']
+
+        if not title or not year or len(year) > 4 or len(title) > 60:
+            flash('输入错误!')
+            return redirect(url_for('edit', movie_id = movie_id))
+
+        movie.title = title
+        movie.year = year
+        db.session.commit()
+        flash('更新成功')
+        return redirect(url_for('index'))
+
+    return render_template('edit.html', movie = movie)
+
+    
