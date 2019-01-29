@@ -20,6 +20,7 @@ def forge():
     '''初始化数据'''
     db.create_all()
 
+    name = 'Song'
     movies = [
         {'title': '龙猫', 'year': '1988'},
         {'title': '死亡诗社', 'year': '1989'},
@@ -34,6 +35,8 @@ def forge():
         {'title': '沉默爆裂', 'year': '2018'},
     ]
 
+    user = User(username = name)
+    db.session.add(user)
     for m in movies:
         movie = Movie(title=m['title'], year=m['year'])
         db.session.add(movie)
